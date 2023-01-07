@@ -14,7 +14,11 @@ interface IProps {
  * Perspective library adds load to HTMLElement prototype.
  * This interface acts as a wrapper for Typescript compiler.
  */
-interface PerspectiveViewerElement {
+<<<<<<< Updated upstream
+interface PerspectiveViewerElement extends HTMLElement{
+=======
+interface PerspectiveViewerElement extends HTMLElement {
+>>>>>>> Stashed changes
   load: (table: Table) => void,
 }
 
@@ -32,16 +36,21 @@ class Graph extends Component<IProps, {}> {
 
   componentDidMount() {
     // Get element to attach the table from the DOM.
-    const elem: PerspectiveViewerElement = document.getElementsByTagName('perspective-viewer')[0] as unknown as PerspectiveViewerElement;
+<<<<<<< Updated upstream
+    const elem = document.getElementsByTagName('perspective-viewer')[0] as unknown as PerspectiveViewerElement
+     const schema = {
+=======
+    const elem = document.getElementsByTagName('perspective-viewer')[0] as unknown as PerspectiveViewerElement;
 
     const schema = {
+>>>>>>> Stashed changes
       stock: 'string',
       top_ask_price: 'float',
       top_bid_price: 'float',
       timestamp: 'date',
     };
 
-    if (window.perspective && window.perspective.worker()) {
+   if(window.perspective){
       this.table = window.perspective.worker().table(schema);
     }
     if (this.table) {
@@ -49,6 +58,19 @@ class Graph extends Component<IProps, {}> {
 
       // Add more Perspective configurations here.
       elem.load(this.table);
+<<<<<<< Updated upstream
+         elem.setAttribute('view', 'y_line');
+=======
+       elem.setAttribute('view', 'y_line');
+>>>>>>> Stashed changes
+      elem.setAttribute('column-pivots', '["stock"]');
+      elem.setAttribute('row-pivots', '["timestamp"]');
+      elem.setAttribute('columns','["top_ask_price"]');
+      elem.setAttribute('aggregates', `
+      {"stock": "distinct count",
+      "top_ask_price":"avg",
+      "top_bid_price": "avg",
+      "timestamp":"distinct count"}`)
     }
   }
 
