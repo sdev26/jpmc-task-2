@@ -8,7 +8,11 @@ import './App.css';
  */
 interface IState {
   data: ServerRespond[],
+<<<<<<< Updated upstream
   showGraph: boolean,
+=======
+  ShowGraph: boolean,
+>>>>>>> Stashed changes
 }
 
 /**
@@ -23,7 +27,11 @@ class App extends Component<{}, IState> {
       // data saves the server responds.
       // We use this state to parse data down to the child element (Graph) as element property
       data: [],
+<<<<<<< Updated upstream
       showGraph:false,
+=======
+      ShowGraph:false,
+>>>>>>> Stashed changes
     };
   }
 
@@ -31,8 +39,13 @@ class App extends Component<{}, IState> {
    * Render Graph react component with state.data parse as property data
    */
   renderGraph() {
+<<<<<<< Updated upstream
     if (this.state.showGraph) {
       return (<Graph data={this.state.data}/>)
+=======
+    if(this.state.ShowGraph){
+    return (<Graph data={this.state.data}/>)
+>>>>>>> Stashed changes
     }
   }
 
@@ -40,6 +53,7 @@ class App extends Component<{}, IState> {
    * Get new data from server and update the state with the new data
    */
   getDataFromServer() {
+<<<<<<< Updated upstream
  let x = 0;
    const interval = setInterval(() => {
       DataStreamer.getData((serverResponds: ServerRespond[]) => {
@@ -53,6 +67,23 @@ class App extends Component<{}, IState> {
         clearInterval(interval);
       }
     }, 100);
+=======
+    let x = 0;
+      const interval = setInterval(() => {
+        DataStreamer.getData((serverResponds: ServerRespond[]) => {
+          // Update the state by creating a new array of data that consists of
+          // Previous data in the state and the new data from server
+          this.setState({
+            data: serverResponds,
+            ShowGraph: true,
+          });
+        });
+        x++;
+        if ( x > 1000 ) {
+          clearInterval(interval);
+        }
+      }, 100);
+>>>>>>> Stashed changes
   }
 
   /**
